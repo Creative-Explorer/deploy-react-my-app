@@ -1,0 +1,109 @@
+/* SessionExpired.css */
+
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #f7f7f7;
+  color: #333;
+}
+
+/* Full height container */
+.session-expired-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  padding: 20px;
+  background-image: linear-gradient(to right, #f7f7f7, #e2e2e2);
+}
+
+/* Card design */
+.session-expired-content {
+  text-align: center;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  max-width: 450px;
+  width: 90%;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.session-expired-content:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Headline styles */
+h1 {
+  color: #d9534f; /* Red color for expired session */
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Paragraph styles */
+p {
+  color: #555;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  margin-bottom: 25px;
+}
+
+/* Button styles */
+.login-button {
+  background-color: #5cb85c; /* Green button */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 25px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s;
+  outline: none;
+}
+
+.login-button:hover {
+  background-color: #4cae4f; /* Darker green on hover */
+  transform: scale(1.05);
+}
+
+/* Additional styles for smaller screens */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 2rem; /* Smaller headline on mobile */
+  }
+
+  .session-expired-content {
+    padding: 30px; /* Adjust padding for mobile */
+  }
+
+  .login-button {
+    padding: 10px 20px; /* Smaller button padding */
+    font-size: 16px; /* Smaller font size */
+  }
+}
+
+/* Animation for fading in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.session-expired-content {
+  animation: fadeIn 0.5s ease-in-out; /* Fade-in effect */
+}
+
+/* Border styling */
+.session-expired-content {
+  border: 1px solid #d9534f;
+  padding: 20px;
+  border-radius: 10px;
+}
+

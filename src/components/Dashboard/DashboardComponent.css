@@ -1,0 +1,2973 @@
+/* src/components/DashboardComponent.css */
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.dashboard-header {
+  background-color: #0264d6;
+  /* Header background color */
+  color: white;
+  padding: 10px 20px;
+  /* Reduced padding for a shorter header */
+  height: 30px;
+  /* Fixed height for header */
+  display: flex;
+  align-items: center;
+  /* Center items vertically */
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  /* Ensure it takes full width */
+}
+
+.logo {
+  font-size: 16px;
+  /* Font size of the logo */
+  font-weight: bold;
+  color: #f8f8f8;
+  /* Dark color for better readability */
+  display: grid;
+  /* Use grid for alignment */
+  grid-template-columns: 1fr 1fr;
+  /* Two equal columns */
+  gap: 10px;
+  /* Space between items */
+  margin-bottom: 5px;
+  /* Space below the logo */
+}
+
+.logo-item {
+  display: contents;
+  /* Allows direct use of grid items */
+  color: #ffffff;
+  font-size: 14px;
+}
+
+
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  /* Adjust gap between navigation links */
+}
+
+.nav-links li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.nav-links li a:hover {
+  text-decoration: underline;
+}
+
+.dashboard-content {
+  flex: 1;
+  /* This will take up the remaining space */
+  padding: 20px;
+  background-color: #f4f4f4;
+  /* Content background color */
+}
+
+.dashboard-footer {
+  background-color: #1c2b5a;
+  /* Footer background color */
+  color: white;
+  text-align: center;
+  padding: 8px 20px;
+  /* Reduced padding for a more compact footer */
+  height: 40px;
+  /* Fixed height for footer */
+  display: flex;
+  align-items: center;
+  /* Center items vertically */
+  justify-content: center;
+  /* Center items horizontally */
+}
+
+
+/* Styles for search box and suggestions dropdown */
+.search-box {
+  position: relative;
+  width: 100px;
+  /* Allow dropdown to be positioned absolutely */
+}
+
+.suggestions-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.suggestion-item {
+  padding: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  color: black;
+  /* Set text color to black */
+}
+
+/* Styles for search box and clear button */
+/* Styles for search box and clear button */
+.search-box {
+  position: relative;
+  /* Allow dropdown to be positioned absolutely */
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 20px;
+  padding: 5px 10px;
+  flex: 1;
+  /* Allow search box to grow */
+  max-width: 600px;
+  /* Limit max width */
+  margin: 0 20px;
+  /* Add margin for spacing */
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  padding: 5px;
+  font-size: 16px;
+  flex: 1;
+}
+
+.clear-button {
+  position: absolute;
+  right: 10px;
+  /* Space from the right edge */
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #0264d6;
+  /* Icon color */
+  font-size: 16px;
+  /* Adjust size as needed */
+  padding: 0;
+}
+
+.clear-button:focus {
+  outline: none;
+}
+
+.search-button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: #0264d6;
+  font-size: 18px;
+  padding: 5px;
+}
+
+.search-button:hover {
+  color: #d44179;
+}
+
+/* Styles for suggestions dropdown */
+.suggestions-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+  margin-top: 5px;
+  /* Space between input and dropdown */
+}
+
+.suggestion-item {
+  padding: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  color: black;
+  /* Set text color to black */
+}
+
+.suggestion-item:hover {
+  background-color: #f0f0f0;
+  color: black;
+  /* Ensure text color remains black on hover */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    /* Stack items vertically on small screens */
+    align-items: flex-start;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    /* Stack links vertically */
+    gap: 10px;
+  }
+
+  .search-box {
+    margin: 10px 0;
+    /* Adjust margin for smaller screens */
+    width: 100%;
+    /* Full width on small screens */
+  }
+}
+
+/* src/components/DashboardComponent.css */
+/* Slider Container */
+.slider-container {
+  position: relative;
+  width: 95vw;
+  /* Full viewport width */
+  max-width: 1900px;
+  /* Maximum width for larger screens */
+  margin: auto;
+  /* Center align horizontally */
+  overflow: hidden;
+  border-radius: 10px;
+  /* Rounded corners for the container */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /* Subtle shadow for depth */
+}
+
+/* Slider Wrapper */
+.slider {
+  display: flex;
+  width: 100%;
+  transition: transform 0.5s ease-in-out;
+}
+
+/* Each Slide */
+.slide {
+  min-width: 100%;
+  /* Each slide takes up the full width of the container */
+  box-sizing: border-box;
+  /* Include padding and border in the element's total width and height */
+}
+
+/* Slider Images */
+.slide img {
+  width: 100%;
+  /* Each image should fill the width of its slide */
+  height: auto;
+  /* Maintain aspect ratio of images */
+  object-fit: cover;
+  /* Ensures images cover the container without distortion */
+  display: block;
+  /* Remove any extra space below images */
+  border-radius: 10px;
+  /* Rounded corners for images */
+}
+
+/* Navigation Buttons */
+.button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.6);
+  /* Darker background color */
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 12px;
+  /* Slightly larger padding */
+  border-radius: 50%;
+  /* Circular buttons */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  /* More pronounced shadow */
+  font-size: 1.5rem;
+  /* Larger icons */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  z-index: 1000;
+  width: 60px;
+  /* Larger width */
+  height: 60px;
+  /* Larger height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  /* Even darker on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+  /* More pronounced shadow */
+}
+
+.prev {
+  left: 15px;
+  /* Adjust as needed */
+}
+
+.next {
+  right: 15px;
+  /* Adjust as needed */
+}
+
+
+
+/* Pagination Dots */
+.pagination-dots {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 1000;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dot.active {
+  background-color: white;
+}
+
+/* Gradient Overlay */
+.gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 100%);
+  border-radius: 10px;
+  /* Match the image's rounded corners */
+}
+
+
+/* src/components/DashboardComponent.css */
+
+/* Other existing styles */
+
+/* src/components/DashboardComponent.css */
+
+/* General grid container style */
+/* src/components/DashboardComponent.css */
+
+/* General grid container style */
+/* Product Grid Container */
+.products-grid {
+  padding: 20px;
+  background-color: #f9f9f9;
+  /* Light grey background for a soft contrast */
+}
+
+/* Flex container for the product list */
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  /* Space between product cards */
+  justify-content: center;
+  /* Center align items for a balanced look */
+}
+
+/* Style for each product card */
+.product-card {
+  border: 1px solid #e0e0e0;
+  /* Light border for a subtle boundary */
+  border-radius: 15px;
+  /* Enhanced rounded corners */
+  overflow: hidden;
+  width: calc(16.666% - 20px);
+  /* 6 items per row */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  /* Softer and larger shadow for depth */
+  background-color: #ffffff;
+  text-align: center;
+  padding: 10px;
+  /* Reduced padding for a tighter layout */
+  box-sizing: border-box;
+  /* Include padding and border in width */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  /* Smooth transitions */
+}
+
+.product-card:hover {
+  transform: translateY(-10px);
+  /* More pronounced lift on hover */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  /* Enhanced shadow on hover */
+  border-color: #0264d6;
+  /* Color change on hover for emphasis */
+}
+
+/* Image styling within the product card */
+.product-image {
+  width: 100%;
+  height: 150px;
+  /* Reduced height for smaller images */
+  object-fit: cover;
+  /* Cover the entire area */
+  border-bottom: 2px solid #0264d6;
+  /* Colored border to enhance separation */
+  border-radius: 15px 15px 0 0;
+  /* Rounded top corners to match card */
+  transition: transform 0.3s ease;
+  /* Smooth zoom effect on hover */
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.05);
+  /* Zoom effect on hover */
+}
+
+/* Style for product info section */
+.product-info {
+  padding: 10px 5px;
+  /* Reduced padding for a tighter layout */
+  background-color: #ffffff;
+  /* Match card background */
+}
+
+.product-info h3 {
+  font-size: 1.1rem;
+  /* Slightly smaller title font */
+  margin: 10px 0;
+  color: #333;
+  /* Darker color for better readability */
+  font-weight: 600;
+  /* Slightly bolder font for titles */
+}
+
+.product-info p {
+  font-size: 0.9rem;
+  /* Consistent font size */
+  color: #666;
+  /* Lighter color for less emphasis */
+  margin: 5px 0;
+}
+
+/* Button styling for actions */
+.product-action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.product-action-buttons button {
+  background-color: #0264d6;
+  /* Primary button color */
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  /* Consistent padding */
+  border-radius: 5px;
+  /* Rounded corners */
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  /* Smooth transitions */
+}
+
+.product-action-buttons button:hover {
+  background-color: #024a8c;
+  /* Darker color on hover */
+  transform: scale(1.05);
+  /* Slight zoom effect on hover */
+}
+
+/* Responsive styles for product grid */
+@media (max-width: 1200px) {
+  .product-card {
+    width: calc(16.666% - 20px);
+    /* Maintain 6 items per row on large screens */
+  }
+}
+
+@media (max-width: 992px) {
+  .product-card {
+    width: calc(20% - 20px);
+    /* Adjust to 5 items per row for smaller screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .product-card {
+    width: calc(25% - 20px);
+    /* Adjust to 4 items per row for smaller screens */
+  }
+}
+
+@media (max-width: 576px) {
+  .product-card {
+    width: calc(33.333% - 20px);
+    /* Adjust to 3 items per row for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .product-card {
+    width: calc(50% - 20px);
+    /* Adjust to 2 items per row for very small screens */
+  }
+}
+
+@media (max-width: 360px) {
+  .product-card {
+    width: 100%;
+    /* 1 item per row for extremely small screens */
+  }
+}
+
+/* Add to Cart Button */
+.add-to-cart-button {
+  background-color: #0264d6;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.add-to-cart-button:hover {
+  background-color: #024f9c;
+}
+
+/* Cart Section Styles */
+.cart-section {
+  padding: 20px;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.cart-item-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.cart-item-info {
+  flex: 1;
+}
+
+.cart-item-price {
+  font-size: 18px;
+  color: #0264d6;
+}
+
+/* Ensure the cart link reflects the number of items */
+.nav-links .cart-link {
+  position: relative;
+}
+
+.nav-links .cart-link::after {
+  content: ' (' attr(data-cart-count) ')';
+  font-size: 14px;
+  color: #d44179;
+}
+
+/* Cart Section Styles */
+.cart-section {
+  padding: 20px;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.cart-item-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.cart-item-info {
+  flex: 1;
+}
+
+.cart-item-price {
+  font-size: 18px;
+  color: #0264d6;
+}
+
+.remove-from-cart-button {
+  background-color: #d44179;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.cart-section {
+  padding: 1rem;
+}
+
+.cart-items-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cart-item {
+  display: flex;
+  border-bottom: 1px solid #ccc;
+  padding: 1rem 0;
+  align-items: flex-start;
+}
+
+.cart-item-image {
+  width: 150px;
+  height: auto;
+  margin-right: 1rem;
+}
+
+.cart-item-details {
+  flex: 1;
+}
+
+.cart-item-title {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.cart-item-price {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
+.cart-item-stock,
+.cart-item-shipping {
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.cart-item-quantity {
+  margin: 1rem 0;
+}
+
+.cart-item-quantity label {
+  margin-right: 0.5rem;
+}
+
+.cart-item-quantity input {
+  width: 60px;
+}
+
+.remove-from-cart-button {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.remove-from-cart-button:hover {
+  background-color: #c82333;
+}
+
+.cart-summary {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+
+.remove-from-cart-button:hover {
+  background-color: #c33a6d;
+}
+
+/* Ensure the cart link reflects the number of items */
+.nav-links .cart-link {
+  position: relative;
+}
+
+.nav-links .cart-link::after {
+  content: ' (' attr(data-cart-count) ')';
+  font-size: 14px;
+  color: #d44179;
+}
+
+.cart-section {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.cart-items-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.cart-items-list {
+  flex: 2;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cart-item {
+  display: flex;
+  border-bottom: 1px solid #ccc;
+  padding: 1rem 0;
+  align-items: flex-start;
+}
+
+.cart-item-image {
+  width: 150px;
+  height: auto;
+  margin-right: 1rem;
+}
+
+.cart-item-details {
+  flex: 1;
+}
+
+.cart-item-title {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.cart-item-price {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
+.cart-item-stock,
+.cart-item-shipping {
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.cart-item-quantity {
+  margin: 1rem 0;
+}
+
+.cart-item-quantity label {
+  margin-right: 0.5rem;
+}
+
+.cart-item-quantity input {
+  width: 60px;
+}
+
+.remove-from-cart-button {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.remove-from-cart-button:hover {
+  background-color: #c82333;
+}
+
+.cart-summary-container {
+  flex: 1;
+  padding: 0 1rem;
+  border-left: 1px solid #ddd;
+}
+
+.cart-summary {
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.delivery-info {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.subtotal {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+.proceed-to-buy-button {
+  background-color: #ff9900;
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  border-radius: 5px;
+}
+
+.proceed-to-buy-button:hover {
+  background-color: #e68a00;
+}
+
+.emi-available {
+  font-size: 0.9rem;
+  color: #333;
+  margin-top: 0.5rem;
+}
+
+/* Dashboard.css */
+
+.dashboard-footer {
+  background-color: #f8f8f8;
+  color: #333;
+  font-size: 14px;
+  padding: 40px 20px;
+  border-top: 1px solid #ddd;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 200px;
+  margin: 0 20px;
+}
+
+.footer-section h3 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+  color: #333;
+  text-decoration: none;
+}
+
+.footer-section ul li a:hover {
+  text-decoration: underline;
+}
+
+.social-media {
+  margin: 20px 0;
+}
+
+.social-media a {
+  color: #333;
+  font-size: 20px;
+  margin-right: 15px;
+  text-decoration: none;
+}
+
+.social-media a:hover {
+  color: #007bff;
+}
+
+.footer-email {
+  margin: 10px 0;
+}
+
+.footer-bottom {
+  border-top: 1px solid #ddd;
+  padding-top: 15px;
+  text-align: center;
+  font-size: 12px;
+  color: #666;
+}
+
+/* Dashboard.css */
+
+.dashboard-footer {
+  background-color: #222;
+  /* Dark background for a more professional look */
+  color: #e0e0e0;
+  /* Light text color for contrast */
+  padding: 60px 20px;
+  /* Increased padding for a spacious feel */
+  border-top: 1px solid #444;
+  /* Slightly lighter border for subtle separation */
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  /* Limit the maximum width for better alignment */
+  margin: 0 auto;
+  /* Center align the footer */
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 200px;
+  margin: 0 20px;
+}
+
+.footer-section h3 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  /* Slightly bolder text */
+  color: #fff;
+  /* White color for section headers */
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 15px;
+  /* Increased spacing between items */
+}
+
+.footer-section ul li a {
+  color: #e0e0e0;
+  /* Light gray color for links */
+  text-decoration: none;
+  transition: color 0.3s;
+  /* Smooth transition for hover effect */
+}
+
+.footer-section ul li a:hover {
+  color: #1e90ff;
+  /* Blue color on hover for a touch of color */
+  text-decoration: underline;
+}
+
+.social-media {
+  margin: 20px 0;
+}
+
+.social-media a {
+  color: #e0e0e0;
+  font-size: 24px;
+  /* Slightly larger icons for better visibility */
+  margin-right: 20px;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.social-media a:hover {
+  color: #1e90ff;
+  /* Blue color on hover for social media icons */
+}
+
+.footer-email {
+  margin: 15px 0;
+  font-size: 14px;
+  /* Adjusted font size for the email */
+}
+
+.footer-bottom {
+  border-top: 1px solid #444;
+  padding-top: 15px;
+  text-align: center;
+  font-size: 14px;
+  /* Larger font size for better readability */
+  color: #bbb;
+  /* Lighter gray color for copyright text */
+}
+
+/* Dashboard.css */
+
+.dashboard-footer {
+  background-color: #1e1e1e;
+  /* Darker background color for better contrast */
+  color: #e0e0e0;
+  /* Light text color for readability */
+  padding: 60px 20px;
+  /* Increased padding for more height */
+  border-top: 1px solid #333;
+  /* Subtle border to separate from the main content */
+  position: relative;
+  /* Ensures proper stacking of background elements */
+  overflow: hidden;
+  /* Hides any content that overflows */
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  /* Center align the footer and limit width */
+  margin: 0 auto;
+  /* Center the footer content */
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 200px;
+  margin: 10px;
+  /* Adjusted margin for better spacing */
+}
+
+.footer-section h3 {
+  font-size: 18px;
+  margin-bottom: 20px;
+  /* Increased spacing for better separation */
+  font-weight: 700;
+  /* Bolder text for headers */
+  color: #ffffff;
+  /* White color for headers */
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 12px;
+  /* Slightly increased spacing between list items */
+}
+
+.footer-section ul li a {
+  color: #b0b0b0;
+  /* Light gray color for links */
+  text-decoration: none;
+  transition: color 0.3s ease;
+  /* Smooth transition for hover effect */
+}
+
+.footer-section ul li a:hover {
+  color: #1e90ff;
+  /* Blue color on hover */
+  text-decoration: underline;
+  /* Underline on hover */
+}
+
+.social-media {
+  margin-top: 30px;
+  /* Increased space above social media links */
+}
+
+.social-media a {
+  color: #e0e0e0;
+  font-size: 28px;
+  /* Larger icons for better visibility */
+  margin-right: 20px;
+  /* More space between icons */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.social-media a:hover {
+  color: #1e90ff;
+  /* Blue color for hover effect */
+}
+
+.footer-email {
+  margin-top: 20px;
+  /* Increased space above email section */
+  font-size: 16px;
+  /* Larger font size for better readability */
+}
+
+.footer-bottom {
+  border-top: 1px solid #333;
+  /* Matches the border color */
+  padding-top: 15px;
+  /* Added padding for separation */
+  text-align: center;
+  font-size: 16px;
+  /* Slightly larger font size for better readability */
+  color: #b0b0b0;
+  /* Lighter gray for footer text */
+}
+
+
+/* Product Grid */
+.slider-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  /* Space below the heading */
+}
+
+.slider-container {
+  position: relative;
+  width: 100%;
+  /* Adjust to the container's full width */
+  max-width: 1300px;
+  /* Maximum width for larger screens */
+  margin: auto;
+  /* Center align horizontally */
+  overflow: hidden;
+  border-radius: 0;
+  /* Rounded corners for the container */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /* Subtle shadow for depth */
+}
+
+/* pagination and table */
+
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.product-table th,
+.product-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.product-table th {
+  background-color: #f4f4f4;
+}
+
+.pagination-controls {
+  margin-top: 20px;
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: flex-end;
+  /* Aligns the pagination to the right */
+  margin-top: 20px;
+  /* Adds some spacing above the pagination */
+}
+
+.pagination-list {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.MuiPagination-root {
+  border-radius: 8px;
+  /* Rounded corners */
+  background-color: #f5f5f5;
+  /* Light background color */
+  padding: 10px 20px;
+  /* Padding around the pagination */
+}
+
+.MuiPagination-item {
+  margin: 0 5px;
+  /* Spacing between pagination items */
+  color: #007bff;
+  /* Primary color */
+  font-weight: bold;
+  /* Bold font */
+  transition: background-color 0.3s ease;
+  /* Smooth transition */
+}
+
+.MuiPagination-item:hover {
+  background-color: #007bff;
+  /* Hover background color */
+  color: #fff;
+  /* White text on hover */
+  border-radius: 4px;
+  /* Rounded corners on hover */
+}
+
+.MuiPagination-item.Mui-selected {
+  background-color: #007bff;
+  /* Selected background color */
+  color: #fff;
+  /* White text for selected page */
+  border-radius: 4px;
+  /* Rounded corners for selected page */
+}
+
+.MuiPagination-item.Mui-disabled {
+  color: #ccc;
+  /* Color for disabled items */
+}
+
+.product-card.disabled {
+  opacity: 0.5;
+  /* Make the product card look disabled */
+  pointer-events: none;
+  /* Prevent interaction */
+}
+
+.auth-message {
+  color: red;
+  /* Style the authorization message */
+  text-align: center;
+  margin: 20px 0;
+}
+
+/* un authorization access*/
+
+.disabled {
+  opacity: 0.5;
+  /* Makes the product card look faded */
+  pointer-events: none;
+  /* Prevents interaction */
+}
+
+.product-card {
+  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+
+.product-card.disabled {
+  opacity: 0.5;
+  /* Make disabled products look faded */
+  pointer-events: none;
+  /* Disable all interactions */
+}
+
+.product-card.disabled .add-to-cart-button {
+  background-color: #ccc;
+  /* Grey out the button */
+  color: #666;
+  /* Change text color */
+  cursor: not-allowed;
+  /* Change cursor to indicate it's not clickable */
+}
+
+.product-image {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s;
+}
+
+.product-card:hover:not(.disabled) {
+  transform: scale(1.05);
+  /* Scale up on hover if not disabled */
+}
+
+/* Ensure buttons are styled */
+.add-to-cart-button {
+  background-color: #007bff;
+  /* Default button color */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.add-to-cart-button:disabled {
+  background-color: #ccc;
+  /* Grey out the button when disabled */
+  cursor: not-allowed;
+  /* Change cursor to indicate it's not clickable */
+}
+
+.product-card.disabled {
+  opacity: 0.5;
+  /* Make disabled products look faded */
+  pointer-events: none;
+  /* Disable all interactions */
+  background-color: rgba(255, 0, 0, 0.1);
+  /* Light red background for testing */
+}
+
+.no-access-message {
+  text-align: center;
+  padding: 20px;
+  font-size: 18px;
+  color: #ff0000;
+  /* or any color you prefer */
+}
+
+.unauthorized-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.5); /* Lower opacity (50%) */
+  border: 2px solid #ff0000; /* Red border */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+
+.message-content {
+  text-align: center;
+}
+
+.contact-support-button {
+  background-color: #ff0000;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.contact-support-button:hover {
+  background-color: #cc0000;
+}
+
+.disabled-products-message {
+  text-align: center;
+  padding: 15px;
+  background-color: #ffe6e6;
+  /* Light red background */
+  color: #ff0000;
+  /* Red text */
+  border: 1px solid #ffcccc;
+  /* Slightly darker border */
+  border-radius: 5px;
+  margin: 20px 0;
+  /* Space above and below */
+  font-size: 16px;
+  /* Font size for the message */
+}
+
+.unauthorized-message.highlight {
+  background: rgba(255, 223, 186, 0.9);
+  /* Light orange background */
+  border: 2px solid #ff9900;
+  /* Orange border */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.disabled-background {
+  background: rgba(255, 223, 186, 0.9);
+  /* Light orange background */
+  border: 2px solid #ff9900;
+  /* Orange border */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.disabled-products-message {
+  background: rgba(255, 223, 186, 0.9);
+  /* Light orange background */
+  border: 2px solid #ff9900;
+  /* Orange border */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+  text-align: center;
+  /* Center the text */
+}
+
+.disabled-products-overlay {
+  position: absolute;
+  /* Position the overlay */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 0, 0, 0.1);
+  /* Light red background with low opacity */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  /* Ensure it overlays above other content */
+}
+
+.disabled-products-message {
+  background: rgba(255, 223, 186, 0.9);
+  /* Light orange background */
+  border: 2px solid #ff9900;
+  /* Orange border */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  /* Center the text */
+}
+
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  /* Reduced space between product cards */
+  justify-content: center;
+  /* Center align items for a balanced look */
+  padding: 10px;
+  /* Optional: Add padding around the list */
+}
+
+.product-card {
+  flex: 0 1 150px;
+  /* Set a fixed width for product cards */
+  margin: 5px;
+  /* Add margin for spacing */
+  border: 1px solid #ddd;
+  /* Optional: Add a border to each card */
+  border-radius: 8px;
+  /* Optional: Rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  /* Optional: Subtle shadow */
+  transition: transform 0.2s;
+  /* Smooth transition for hover effect */
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+  /* Slightly enlarge on hover */
+}
+
+
+.products-container {
+  display: flex;
+  flex-wrap: wrap;
+  /* Allows wrapping to the next row */
+  justify-content: flex-start;
+  /* Align items to the start of the container */
+}
+
+.product-card {
+  margin: 10px;
+  /* Space between cards */
+  width: calc(16.66% - 20px);
+  /* 6 products per row; adjust for margins */
+  box-sizing: border-box;
+  /* Ensure padding and borders are included in the width */
+}
+
+.product-card.disabled {
+  opacity: 0.3;
+  /* Set low opacity for disabled products */
+  pointer-events: none;
+  /* Prevent interaction */
+}
+
+.unauthorized-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.5); /* Lower opacity (50%) */
+  border: 2px solid #ff0000; /* Red border */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+
+/* table */
+
+.products-grid {
+  margin: 20px;
+  font-family: Arial, sans-serif;
+  /* Change to your preferred font */
+}
+
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-table th,
+.product-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+  font-size: 14px;
+  transition: background-color 0.3s;
+  /* Smooth transition for hover */
+}
+
+.product-table th {
+  background-color: #007bff;
+  /* Header background color */
+  color: white;
+  /* Header text color */
+}
+
+.product-table tbody tr {
+  background-color: #fff;
+  /* Default row background */
+}
+
+.product-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+  /* Alternate row color */
+}
+
+.product-table tbody tr:hover {
+  background-color: #f1f1f1;
+  /* Row hover effect */
+}
+
+.product-image {
+  border-radius: 5px;
+  width: 40px;
+  /* Adjusted image size */
+  height: 40px;
+  /* Adjusted image size */
+}
+
+.add-to-cart-button {
+  padding: 6px 12px;
+  /* Button padding */
+  font-size: 14px;
+  /* Button font size */
+  border: none;
+  /* Remove border */
+  border-radius: 5px;
+  /* Rounded corners */
+  background-color: #28a745;
+  /* Green button color */
+  color: white;
+  /* Button text color */
+  cursor: pointer;
+  /* Pointer cursor */
+  transition: background-color 0.3s;
+  /* Smooth transition for hover */
+}
+
+.add-to-cart-button:hover {
+  background-color: #218838;
+  /* Darker green on hover */
+}
+
+.quantity-input {
+  width: 50px;
+  /* Input width */
+  font-size: 14px;
+  /* Font size for input */
+  padding: 5px;
+  /* Padding for input */
+  border: 1px solid #ccc;
+  /* Input border */
+  border-radius: 4px;
+  /* Rounded corners for input */
+}
+
+.unauthorized-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  /* Padding for the message */
+  border: 2px solid #f00;
+  z-index: 10;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  /* Shadow for the message box */
+}
+
+.contact-support-button {
+  font-size: 14px;
+  /* Button font size */
+  padding: 8px 12px;
+  /* Button padding */
+  border: none;
+  /* Remove border */
+  border-radius: 5px;
+  /* Rounded corners */
+  background-color: #007bff;
+  /* Button color */
+  color: white;
+  /* Text color */
+  cursor: pointer;
+  /* Pointer cursor */
+  transition: background-color 0.3s;
+  /* Smooth transition for hover */
+}
+
+.contact-support-button:hover {
+  background-color: #0056b3;
+  /* Darker blue on hover */
+}
+
+.low-opacity {
+  opacity: 0.5;
+  /* Adjust opacity as needed */
+  pointer-events: none;
+  /* Prevent interaction with the table */
+}
+
+.disabled-row {
+  opacity: 0.5;
+  /* Lower opacity for disabled rows */
+  pointer-events: none;
+  /* Prevent interaction */
+}
+
+.custom-pagination-container {
+  display: flex;
+  justify-content: flex-end;
+  /* Align items to the right */
+  align-items: center;
+  /* Center items vertically */
+  margin: 20px 0;
+  /* Spacing above and below */
+}
+
+.pagination-info {
+  font-size: 1.2em;
+  /* Larger font size for the page indicator */
+  color: #343a40;
+  /* Dark color for better visibility */
+  margin-right: 20px;
+  /* Space after the page info */
+}
+
+.pagination-stack {
+  display: flex;
+  /* Ensure stack aligns correctly */
+}
+
+.custom-pagination-list {
+  display: flex;
+  padding: 0;
+  /* Remove default padding */
+}
+
+.custom-pagination-item {
+  border-radius: 5px;
+  /* Rounded corners */
+  margin: 0 5px;
+  /* Space between buttons */
+  font-weight: bold;
+  /* Bold font */
+  width: 40px;
+  /* Fixed width */
+  height: 40px;
+  /* Fixed height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f9fa;
+  /* Light background */
+  border: 1px solid #007bff;
+  /* Blue border */
+  color: #007bff;
+  /* Blue text */
+  transition: background-color 0.3s, color 0.3s;
+  /* Smooth transition */
+}
+
+.custom-pagination-item:hover {
+  background-color: #007bff;
+  /* Background change on hover */
+  color: #fff;
+  /* Text color change on hover */
+}
+
+.custom-pagination-item:disabled {
+  background-color: #e9ecef;
+  /* Disabled background */
+  color: #6c757d;
+  /* Disabled text color */
+  cursor: not-allowed;
+  /* Change cursor for disabled buttons */
+}
+
+.custom-pagination-previous,
+.custom-pagination-next {
+  font-weight: bold;
+  /* Bold text for next/prev buttons */
+}
+
+.entries-per-page {
+  margin-right: 20px;
+  /* Space after the dropdown */
+  padding: 5px 10px;
+  /* Padding for better appearance */
+  font-size: 1em;
+  /* Font size */
+  border: 1px solid #007bff;
+  /* Border color */
+  border-radius: 5px;
+  /* Rounded corners */
+  background-color: #f8f9fa;
+  /* Light background */
+  cursor: pointer;
+  /* Pointer cursor on hover */
+}
+
+.payment-success-tick {
+  position: absolute;
+  top: 10px;
+  /* Adjust as needed */
+  right: 10px;
+  /* Adjust as needed */
+  color: green;
+  font-size: 20px;
+  /* Adjust size as needed */
+}
+
+.out-of-stock-label {
+  position: absolute;
+  top: 10px;
+  /* Adjust as needed */
+  left: 10px;
+  /* Adjust as needed */
+  background-color: red;
+  /* Background color */
+  color: white;
+  /* Text color */
+  padding: 5px;
+  /* Padding for better visibility */
+  border-radius: 5px;
+  /* Rounded corners */
+  font-weight: bold;
+  /* Make it stand out */
+}
+
+.status-button {
+  padding: 4px 8px;
+  /* Add padding for better appearance */
+  border: none;
+  /* Remove default border */
+  color: white;
+  /* Default text color */
+  font-weight: bold;
+  /* Make text bold */
+  cursor: pointer;
+  /* Change cursor on hover */
+  border-radius: 8px;
+  /* Rounded corners */
+  text-align: center;
+  /* Center text */
+}
+
+.status-button.SUCCESS {
+  background-color: rgb(49, 148, 49);
+  /* Green for success */
+}
+
+.status-button.REFUNDED {
+  background-color: rgb(197, 197, 62);
+  /* Yellow for refunded */
+  color: black;
+  /* Black text for contrast */
+}
+
+.status-button.PENDING {
+  background-color: rgb(79, 114, 189);
+  /* Pink for pending */
+  color: black;
+  /* Black text for contrast */
+}
+
+.cart-section {
+  padding: 20px;
+  background-color: #f3f4f6;
+  /* Light gray background */
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  /* Maximum width for larger screens */
+  margin: 20px auto;
+  /* Centering */
+}
+
+h2 {
+  text-align: center;
+  /* Center align the heading */
+  margin-bottom: 20px;
+  color: #333;
+  /* Dark color for headings */
+}
+
+.empty-cart {
+  text-align: center;
+  color: #777;
+  /* Gray for empty cart text */
+  font-size: 1.2em;
+}
+
+.cart-container {
+  display: flex;
+  /* Flexbox for layout */
+  justify-content: space-between;
+  /* Space between items */
+  gap: 20px;
+  /* Space between items */
+}
+
+.cart-items {
+  flex: 1;
+  /* Allow cart items to take available space */
+  display: flex;
+  flex-wrap: wrap;
+  /* Wrap items to the next line if necessary */
+  gap: 15px;
+  /* Space between cart items */
+}
+
+.cart-item {
+  display: flex;
+  background-color: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: calc(33.33% - 10px);
+  /* Adjust width for three items per row */
+  box-sizing: border-box;
+  /* Include padding in width calculation */
+  transition: transform 0.2s;
+  /* Smooth transition */
+}
+
+.cart-item:hover {
+  transform: translateY(-5px);
+  /* Lift effect on hover */
+}
+
+.cart-item-image {
+  width: 80px;
+  /* Fixed width for images */
+  height: 80px;
+  /* Fixed height for images */
+  object-fit: cover;
+  /* Ensure the image fits within the box */
+  margin-right: 15px;
+  /* Space between image and text */
+  border-radius: 4px;
+  /* Slight rounding for images */
+}
+
+.cart-item-details {
+  flex: 1;
+  /* Take up remaining space */
+}
+
+.cart-item-price {
+  font-size: 1.4em;
+  /* Slightly larger font size for price */
+  color: #ff5722;
+  /* Price color */
+  margin: 5px 0;
+  /* Spacing for price */
+}
+
+.cart-item-actions {
+  margin-top: 10px;
+  /* Space above actions */
+}
+
+.remove-button {
+  background-color: #ff1744;
+  /* Red color for remove button */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.remove-button:hover {
+  background-color: #d50032;
+  /* Darker red on hover */
+  transform: scale(1.05);
+  /* Slightly enlarge on hover */
+}
+
+.cart-summary {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  /* Fixed width for summary section */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Center align contents */
+}
+
+.cart-summary h4 {
+  margin-bottom: 20px;
+  font-size: 1.6em;
+  /* Larger font size for total */
+  color: #333;
+  /* Dark color for text */
+}
+
+.proceed-button {
+  background-color: #4caf50;
+  /* Green color for proceed button */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 100%;
+  /* Full width for the button */
+}
+
+.proceed-button:hover {
+  background-color: #388e3c;
+  /* Darker green on hover */
+  transform: scale(1.05);
+  /* Slightly enlarge on hover */
+}
+
+
+/* Bulk Excel File Upload*/
+
+/* ExcelUploader.css */
+.excel-uploader {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+}
+
+h2 {
+  color: #333;
+}
+
+input[type="file"] {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.table-container {
+  margin-top: 20px;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+th {
+  background-color: #4CAF50;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #ddd;
+}
+
+.button-container {
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-success {
+  background-color: #4CAF50;
+  /* Green */
+  color: white;
+  margin-right: 10px;
+}
+
+.btn-danger {
+  background-color: #f44336;
+  /* Red */
+  color: white;
+}
+
+button:hover {
+  opacity: 0.9;
+  /* Slightly reduce opacity on hover */
+}
+
+.spinner-circle {
+  display: flex;
+  flex-direction: column;
+  /* Arrange items in a column */
+  justify-content: flex-start;
+  /* Align items to the top */
+  align-items: center;
+  /* Center align horizontally */
+  height: 100vh;
+  /* Full height */
+  background-color: rgba(255, 255, 255, 0.8);
+  /* Slightly transparent background */
+  backdrop-filter: blur(10px);
+  /* Blurring effect for background */
+  position: relative;
+  padding-top: 20px;
+  /* Space from the top */
+}
+
+.spinner {
+  border: 8px solid rgba(0, 123, 255, 0.3);
+  /* Light blue */
+  border-top: 8px solid #007bff;
+  /* Solid blue */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+  /* Glow effect */
+}
+
+.spinner-text {
+  margin-top: 10px;
+  /* Space between spinner and text */
+  text-align: center;
+  font-size: 18px;
+  /* Text size */
+  color: #007bff;
+  /* Text color */
+  font-weight: bold;
+  /* Bold text */
+  opacity: 0.7;
+  /* Slightly transparent */
+  animation: fade 1.5s infinite;
+  /* Fade animation */
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fade {
+
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.dashboard-header {
+  background: linear-gradient(120deg, #cc3976, #384dc4);
+  /* Gradient background */
+  height: 60px;
+  /* Moderate height for the header */
+  padding: 10px 30px;
+  /* Balanced padding */
+  display: flex;
+  align-items: center;
+  /* Center items vertically */
+  color: white;
+  /* Text color */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Subtle shadow */
+  position: relative;
+  /* Position for absolute elements */
+  z-index: 1000;
+  /* Ensure it stays above other elements */
+  transition: background 0.3s;
+  /* Smooth background transition */
+}
+
+.dashboard-header:hover {
+  background: linear-gradient(120deg, #384dc4, #cc3976);
+  /* Darker gradient on hover */
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  /* Space between logo and nav items */
+  width: 100%;
+  /* Full width */
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  /* Center logo items vertically */
+  font-size: 20px;
+  /* Moderate font size */
+  font-weight: bold;
+  /* Bold text for emphasis */
+  letter-spacing: 1px;
+  /* Slight letter spacing */
+}
+
+.logo-item {
+  margin-right: 10px;
+  /* Space between logo items */
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  /* Center search box items vertically */
+  position: relative;
+  /* Needed for positioning suggestions */
+}
+
+.search-box input {
+  padding: 10px;
+  /* Padding for the input */
+  border: 2px solid transparent;
+  /* Transparent border */
+  border-radius: 20px;
+  /* Rounded corners */
+  width: 200px;
+  /* Fixed width for the search input */
+  transition: border 0.3s, box-shadow 0.3s;
+  /* Smooth transitions */
+  outline: none;
+  /* Remove default outline */
+}
+
+.search-box input:focus {
+  border-color: #ffffff;
+  /* Change border color on focus */
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  /* Subtle shadow on focus */
+}
+
+.clear-button {
+  background: none;
+  /* Remove background */
+  border: none;
+  /* Remove border */
+  color: white;
+  /* Button text color */
+  cursor: pointer;
+  /* Pointer cursor */
+  transition: transform 0.2s, color 0.2s;
+  /* Transition for hover effect */
+}
+
+.clear-button:hover {
+  transform: scale(1.1);
+  /* Scale effect on hover */
+  color: #ffcccc;
+  /* Change color on hover */
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  /* Remove default list style */
+  padding: 0;
+  /* Remove padding */
+  margin: 0;
+  /* Remove margin */
+}
+
+.nav-links li {
+  margin: 0 15px;
+  /* Space between nav items */
+  position: relative;
+  /* Position for pseudo-element */
+}
+
+.nav-links a {
+  color: white;
+  /* Link color */
+  text-decoration: none;
+  /* Remove underline */
+  font-size: 16px;
+  /* Moderate font size for links */
+  transition: color 0.3s, transform 0.2s;
+  /* Smooth transition for color and scale */
+}
+
+.nav-links a:hover {
+  color: #ffcccc;
+  /* Change color on hover */
+  transform: translateY(-2px);
+  /* Slight lift effect */
+}
+
+.nav-links a:before {
+  content: '';
+  position: absolute;
+  /* Positioning for underline */
+  width: 0;
+  height: 2px;
+  /* Height of underline */
+  background: white;
+  /* Color of underline */
+  bottom: -5px;
+  /* Position below the text */
+  left: 50%;
+  /* Center the underline */
+  transition: width 0.3s, left 0.3s;
+  /* Smooth transition */
+}
+
+.nav-links a:hover:before {
+  width: 100%;
+  /* Full width on hover */
+  left: 0;
+  /* Align to left */
+}
+
+.logout-button {
+  background-color: #dc3545;
+  /* Logout button color */
+  color: white;
+  /* Text color */
+  border: none;
+  /* Remove border */
+  padding: 10px 15px;
+  /* Padding for button */
+  border-radius: 20px;
+  /* Rounded corners */
+  cursor: pointer;
+  /* Pointer cursor */
+  transition: background-color 0.3s, transform 0.2s;
+  /* Transition for background and scale */
+}
+
+.logout-button:hover {
+  background-color: #c82333;
+  /* Darker shade on hover */
+  transform: scale(1.05);
+  /* Slight increase on hover */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .dashboard-header {
+    flex-direction: column;
+    /* Stack items vertically */
+    height: auto;
+    /* Auto height for smaller screens */
+    padding: 10px 15px;
+    /* Less padding on mobile */
+  }
+
+  .nav-links {
+    flex-direction: column;
+    /* Stack nav items vertically */
+    margin-top: 10px;
+    /* Space above nav links */
+  }
+
+  .nav-links li {
+    margin: 5px 0;
+    /* Space between stacked nav items */
+  }
+
+  .search-box input {
+    width: 100%;
+    /* Full width on smaller screens */
+    margin-top: 10px;
+    /* Space above search input */
+  }
+}
+
+/* Additional styles for dropdown suggestions */
+.suggestions-dropdown {
+  position: absolute;
+  /* Positioning for dropdown */
+  background: white;
+  /* White background */
+  border: 1px solid #ccc;
+  /* Light border */
+  border-radius: 5px;
+  /* Rounded corners */
+  width: 200px;
+  /* Fixed width for dropdown */
+  z-index: 100;
+  /* Above other elements */
+  max-height: 200px;
+  /* Max height for dropdown */
+  overflow-y: auto;
+  /* Scrollable if overflow */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  /* Subtle shadow */
+}
+
+.suggestion-item {
+  padding: 10px;
+  /* Padding for items */
+  cursor: pointer;
+  /* Pointer cursor */
+  transition: background 0.3s;
+  /* Smooth transition */
+}
+
+.suggestion-item:hover {
+  background: #f1f1f1;
+  /* Light gray on hover */
+}
+
+.about-section {
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  max-width: 1200px;
+}
+
+.about-section h2 {
+  font-size: 2rem;
+  color: #343a40;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.about-section p {
+  font-size: 1.1rem;
+  color: #495057;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.charts-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.chart-item {
+  flex: 1 1 45%;
+  /* Flex property for responsive design */
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.chart-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.chart-item h3 {
+  font-size: 1.5rem;
+  color: #007bff;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.chart-item canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+button.add-to-cart-button {
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+button.add-to-cart-button:hover {
+  background-color: #0056b3;
+}
+
+table.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table.product-table th,
+table.product-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #dee2e6;
+}
+
+table.product-table th {
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+.disabled-row {
+  background-color: #f8d7da;
+}
+
+.disabled-row td {
+  color: #721c24;
+}
+
+.unauthorized-message {
+  text-align: center;
+  padding: 30px; /* Increased padding for a spacious feel */
+  background-color: rgba(255, 255, 255, 0.9); /* White with low opacity */
+  border-radius: 15px; /* More rounded corners */
+  margin: 40px auto; /* Centered with top/bottom margin */
+  width: 90%; /* Responsive width */
+  max-width: 600px; /* Maximum width for larger screens */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  font-family: 'Arial', sans-serif; /* Consistent font */
+}
+
+.unauthorized-message h1 {
+  font-size: 2.5rem; /* Larger title font size */
+  font-weight: bold;
+  color: #333; /* Dark gray color for contrast */
+  margin-bottom: 10px; /* Space below title */
+}
+
+.unauthorized-message h2 {
+  font-size: 1.5rem; /* Subtitle font size */
+  color: #555; /* Medium gray for subtitle */
+  margin-bottom: 15px; /* Space below subtitle */
+}
+
+.unauthorized-message p {
+  font-size: 1rem; /* Consistent description size */
+  color: #777; /* Light gray for description */
+  margin-bottom: 20px; /* Space below paragraph */
+}
+
+.contact-support-button {
+  padding: 12px 25px; /* Increased button padding */
+  font-size: 1rem; /* Button text size */
+  color: white; /* Button text color */
+  background-color: #007bff; /* Primary button color */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners for button */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s, transform 0.2s; /* Smooth transition effects */
+}
+
+.contact-support-button:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+  transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+.contact-support-button:active {
+  transform: translateY(0); /* Reset lift on click */
+}
+
+/* Additional responsiveness */
+@media (max-width: 768px) {
+  .unauthorized-message {
+    padding: 20px; /* Less padding on smaller screens */
+  }
+
+  .unauthorized-message h1 {
+    font-size: 2rem; /* Smaller title size on mobile */
+  }
+
+  .unauthorized-message h2 {
+    font-size: 1.25rem; /* Smaller subtitle size on mobile */
+  }
+}
+
+
+
+.unauthorized-message h1 {
+  color: #721c24;
+  font-size: 1.8rem;
+}
+
+.unauthorized-message button {
+  background-color: #dc3545;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.unauthorized-message button:hover {
+  background-color: #c82333;
+}
+
+.custom-pagination-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.entries-per-page {
+  border: 1px solid #007bff;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 1rem;
+}
+
+.pagination-info {
+  font-size: 1rem;
+  color: #495057;
+}
+
+.pagination-stack {
+  margin-left: 20px;
+}
+
+.charts-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.chart-item {
+  width: 45%;
+  /* Adjust width as necessary */
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.chart-item h3 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.charts-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 20px;
+}
+
+.chart-item {
+  background-color: #fff;
+  /* White background for each chart */
+  border-radius: 8px;
+  /* Rounded corners */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  /* Subtle shadow */
+  margin: 10px;
+  padding: 20px;
+  /* Padding inside chart items */
+  width: 100%;
+  /* Full width on small screens */
+  max-width: 600px;
+  /* Limit max width on larger screens */
+}
+
+h3 {
+  font-size: 1.5rem;
+  /* Size of the chart title */
+  margin-bottom: 15px;
+  /* Space below the title */
+  color: #333;
+  /* Darker text color */
+}
+
+.ComposableMap {
+  width: 100%;
+  /* Responsive width */
+  height: auto;
+  /* Maintain aspect ratio */
+}
+
+.Geography {
+  transition: all 0.3s;
+  /* Smooth transition on hover */
+}
+
+.Geography:hover {
+  fill: #D6D6DA;
+  /* Change color on hover */
+  cursor: pointer;
+  /* Pointer cursor for interactivity */
+}
+
+/* Optional: Add some responsiveness for smaller screens */
+@media (max-width: 768px) {
+  .chart-item {
+    width: 90%;
+    /* More width on small screens */
+  }
+}
+/* */
+
+.charts-container {
+  display: flex;
+  flex-wrap: wrap; /* Allow charts to wrap into multiple rows */
+  gap: 20px; /* Space between chart items */
+  justify-content: center; /* Center the charts horizontally */
+  margin: 20px 0; /* Margin above and below the charts container */
+}
+
+.chart-item {
+  background: white; /* Background color for the chart items */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  padding: 15px; /* Padding inside the chart item */
+  width: 300px; /* Fixed width for each chart item */
+  min-height: 250px; /* Minimum height to maintain a consistent layout */
+  display: flex;
+  flex-direction: column; /* Stack title and chart vertically */
+  align-items: center; /* Center align content */
+}
+
+.chart-item h3 {
+  margin-bottom: 10px; /* Space between the title and the chart */
+  font-size: 1.2rem; /* Font size for the chart title */
+  text-align: center; /* Center align the title */
+}
+
+@media (max-width: 768px) {
+  .chart-item {
+    width: 100%; /* Full width on smaller screens */
+  }
+}
+ /* card display */
+
+ .cart-container {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px auto; /* Center the container horizontally */
+  max-width: 800px; /* Limit the maximum width of the container */
+}
+
+.cart-header {
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+}
+
+.cart-header h2 {
+  margin: 0;
+  font-size: 1.5em;
+  color: #333;
+  text-align: center; /* Center header */
+}
+
+.cart-content {
+  padding: 40px 0; /* Add padding to the top and bottom */
+  margin-top: 40px; /* Add margin to push content down */
+  display: flex;
+  justify-content: center; /* Center the card container */
+  transition: background-color 0.3s ease; /* Smooth background transition */
+  background-color: #f9f9f9; /* Light gray background for the content area */
+}
+
+.cart-card-container {
+  display: flex;
+  justify-content: center; /* Center the cards in the container */
+  gap: 20px; /* Space between cards */
+}
+
+.cart-card {
+  background-color: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  width: 250px; /* Fixed width for consistent sizing */
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s; /* Smooth transition */
+}
+
+.cart-card:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+/* Specific styles for left, center, and right cards */
+.left-card {
+  background-color: #e3f2fd; /* Light blue background */
+}
+
+.center-card {
+  background-color: #ffe0b2; /* Light orange background */
+}
+
+.right-card {
+  background-color: #f1f8e9; /* Light green background */
+}
+
+.cart-card h3 {
+  color: #444; /* Darker text color for headings */
+  text-align: center; /* Center headings */
+}
+
+.cart-card p {
+  text-align: center; /* Center paragraphs */
+}
+.cart-card h3 {
+  color: #444; /* Darker text color for headings */
+  text-align: center; /* Center headings */
+}
+
+.cart-card p {
+  font-size: 2em; /* Increase font size for counts */
+  color: #007bff; /* Change color to make it stand out */
+  text-align: center; /* Center paragraphs */
+  margin-top: 10px; /* Add some space above the count */
+}
+.product-list {
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #f9f9f9; /* Light background for contrast */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.product-card {
+  margin-bottom: 15px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: #fff; /* White background for product cards */
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1); /* Light shadow for product cards */
+  transition: transform 0.2s, box-shadow 0.2s; /* Smooth transition for hover effects */
+}
+
+.product-card:hover {
+  transform: translateY(-2px); /* Lift effect on hover */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Increased shadow on hover */
+}
+
+.product-card h3 {
+  margin: 0 0 10px; /* Spacing below the title */
+  font-size: 1.2em; /* Slightly larger font size */
+  color: #333; /* Darker color for better readability */
+}
+
+.product-card p {
+  margin: 5px 0; /* Spacing between paragraphs */
+  color: #666; /* Grey color for secondary text */
+}
+
+.product-card .price {
+  font-weight: bold; /* Make price bold */
+  color: #28a745; /* Green color for price */
+}
+
+.dashboard-footer {
+  background-color: #2c3e50; /* Dark background color */
+  color: #ecf0f1; /* Light text color */
+  padding: 40px 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 200px;
+  margin: 15px;
+}
+
+.footer-section h3 {
+  border-bottom: 2px solid #ecf0f1; /* Bottom border for section titles */
+  padding-bottom: 10px;
+}
+
+.footer-section ul {
+  list-style-type: none; /* Remove bullet points */
+  padding: 0;
+}
+
+.footer-section li {
+  margin: 10px 0; /* Space between list items */
+}
+
+.footer-section a {
+  color: #ecf0f1; /* Link color */
+  text-decoration: none; /* Remove underline */
+  transition: color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.footer-section a:hover {
+  color: #3498db; /* Change color on hover */
+}
+
+.social-media {
+  display: flex;
+  justify-content: space-between;
+  width: 100%; /* Full width for social media links */
+}
+
+.social-media a {
+  color: #ecf0f1;
+  font-size: 24px; /* Icon size */
+  margin: 0 10px;
+  transition: color 0.3s;
+}
+
+.social-media a:hover {
+  color: #3498db; /* Change color on hover */
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px; /* Smaller font for copyright */
+}
+
+.footer-bottom a {
+  color: #3498db; /* Color for additional links */
+}
+
+.footer-bottom a:hover {
+  text-decoration: underline; /* Underline on hover */
+}
+.dashboard-footer {
+  background-color: #2c3e50; /* Dark background color */
+  color: #ecf0f1; /* Light text color */
+  padding: 40px 20px; /* Increased padding for more height */
+  font-family: 'Arial', sans-serif;
+  min-height: 400px; /* Set a minimum height for the footer */
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 200px;
+  margin: 15px;
+}
+
+.footer-section h3 {
+  border-bottom: 2px solid #ecf0f1; /* Bottom border for section titles */
+  padding-bottom: 10px;
+}
+
+.footer-section ul {
+  list-style-type: none; /* Remove bullet points */
+  padding: 0;
+}
+
+.footer-section li {
+  margin: 10px 0; /* Space between list items */
+}
+
+.footer-section a {
+  color: #ecf0f1; /* Link color */
+  text-decoration: none; /* Remove underline */
+  transition: color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.footer-section a:hover {
+  color: #3498db; /* Change color on hover */
+}
+
+.social-media {
+  display: flex;
+  justify-content: space-between;
+  width: 100%; /* Full width for social media links */
+}
+
+.social-media a {
+  color: #ecf0f1;
+  font-size: 24px; /* Icon size */
+  margin: 0 10px;
+  transition: color 0.3s;
+}
+
+.social-media a:hover {
+  color: #3498db; /* Change color on hover */
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px; /* Smaller font for copyright */
+}
+
+.footer-bottom a {
+  color: #3498db; /* Color for additional links */
+}
+
+.footer-bottom a:hover {
+  text-decoration: underline; /* Underline on hover */
+}
+
