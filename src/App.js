@@ -6,11 +6,15 @@ import DashboardComponent from './components/Dashboard/DashboardComponent';
 import PaymentComponent from './components/Payment/PaymentComponent';
 import PrivateRoute from './PrivateRoute'; // Ensure this path is correct
 import SessionExpired from './SessionExpired';
+import Header from './components/common/Header';
+import LanguageSwitcher from './components/LanguageSwitcher';
 
 function App() {
   return (
     <AuthProvider>
       <Router>
+      {/* <Header />  */}
+      <LanguageSwitcher />
         <Routes>
           <Route path="/" element={<Navigate to="/login" />} />
           <Route 

@@ -1,11 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Header.css'; // Optional: add CSS for styling
 
 function Header() {
   return (
     <header className="app-header">
       <h1>My Application</h1>
-      {/* Add navigation links or any other header content */}
+      <nav>
+        <Link to="/login">Login</Link>
+        <Link to="/dashboard">Dashboard</Link>
+        <Link to="/payment">Payment</Link>
+      </nav>
     </header>
   );
 }

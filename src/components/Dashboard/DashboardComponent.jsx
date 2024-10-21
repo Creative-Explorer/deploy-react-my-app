@@ -10,6 +10,13 @@ import { fetchItemCount} from "../../ApiService"
 import { fetchCartItems, removeFromCart } from "../../ApiService";
 import * as XLSX from "xlsx";
 import { Line, Scatter, Bar, Pie } from "react-chartjs-2";
+import { Link } from 'react-router-dom';
+import ConfirmationModal from "../Modal/ConfirmationModal";
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserCircle, faCog, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import L from 'leaflet';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -59,7 +66,7 @@ function DashboardComponent() {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [cart, setCart] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 12;
+  const productsPerPage = 5;
   const searchInputRef = useRef(null);
   const navigate = useNavigate();
   const [showMessage, setShowMessage] = useState(false);
@@ -80,16 +87,26 @@ function DashboardComponent() {
   const [lastActivityTime, setLastActivityTime] = useState(Date.now());
   const [timeoutId, setTimeoutId] = useState(null);
   const [videos, setVideos] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [countries, setCountries] = useState([]);
+    const [searchTermMap, setSearchTermMap] = useState('');
+    const [selectedCountry, setSelectedCountry] = useState(null);
+    const defaultPosition = [20, 77]; // Default center of the map
+    const zoomLevel = selectedCountry ? 5 : 2; // Zoom in if a country is selected
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   // const geoUrl = "https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json";
   const geoUrl =
     "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson";
   const { isAuthenticated } = useAuth();
+  // const [isDropdownOpen, setDropdownOpen] = useState(false);
+
+ 
   const handleLogout = useCallback(() => {
     window.localStorage.removeItem("access_token");
     window.localStorage.removeItem("access_phoneNumber");
-    // logout();
-    navigate("/session-expired");
-  }, [navigate]);
+    logout();
+    // navigate("/session-expired");
+  }, [logout]);
 
   useEffect(() => {
     fetch(geoUrl)
@@ -585,6 +602,16 @@ function DashboardComponent() {
   // Consider using another library like `react-vis` or `d3`.
 
   const role = window.localStorage.getItem("access_role_based") || "Unknown User";
+let userType;
+
+if (role === 'ROLE_USER') {
+  userType = 'User';
+} else if (role === 'ROLE_ADMIN') {
+  userType = 'Admin';
+} else {
+  userType = 'Unknown User'; // Optional: Handle unknown roles
+}
+  
   const userName =
     window.localStorage.getItem("access_userName") || "Unknown User";
 
@@ -623,43 +650,43 @@ function DashboardComponent() {
     };
 // implement inActivity then page will go session expired page
 
-const startInactivityTimer = useCallback(() => {
-  // Start a new inactivity timer
-  const newTimeoutId = setTimeout(() => {
-    handleLogout(); // Call logout function after inactivity
-  }, inactivityDuration);
-  setTimeoutId(newTimeoutId);
-}, [handleLogout]);
+// const startInactivityTimer = useCallback(() => {
+//   // Start a new inactivity timer
+//   const newTimeoutId = setTimeout(() => {
+//     handleLogout(); // Call logout function after inactivity
+//   }, inactivityDuration);
+//   setTimeoutId(newTimeoutId);
+// }, [handleLogout]);
 
-const resetInactivityTimer = useCallback(() => {
-  // Clear existing timeout
-  if (timeoutId) {
-    clearTimeout(timeoutId);
-    setTimeoutId(null); // Reset the timeoutId
-  }
-  // Start a new inactivity timer
-  startInactivityTimer();
-}, [timeoutId, startInactivityTimer]);
+// const resetInactivityTimer = useCallback(() => {
+//   // Clear existing timeout
+//   if (timeoutId) {
+//     clearTimeout(timeoutId);
+//     setTimeoutId(null); // Reset the timeoutId
+//   }
+//   // Start a new inactivity timer
+//   startInactivityTimer();
+// }, [timeoutId, startInactivityTimer]);
 
-useEffect(() => {
-  // Register event listeners for user activity
-  window.addEventListener('click', resetInactivityTimer);
-  window.addEventListener('keydown', resetInactivityTimer);
-  window.addEventListener('mousemove', resetInactivityTimer);
+// useEffect(() => {
+//   // Register event listeners for user activity
+//   window.addEventListener('click', resetInactivityTimer);
+//   window.addEventListener('keydown', resetInactivityTimer);
+//   window.addEventListener('mousemove', resetInactivityTimer);
 
-  // Start the inactivity timer
-  startInactivityTimer();
+//   // Start the inactivity timer
+//   startInactivityTimer();
 
-  return () => {
-    // Cleanup event listeners and timeout on unmount
-    window.removeEventListener('click', resetInactivityTimer);
-    window.removeEventListener('keydown', resetInactivityTimer);
-    window.removeEventListener('mousemove', resetInactivityTimer);
-    if (timeoutId) {
-      clearTimeout(timeoutId);
-    }
-  };
-}, [resetInactivityTimer, startInactivityTimer, timeoutId]);
+//   return () => {
+//     // Cleanup event listeners and timeout on unmount
+//     window.removeEventListener('click', resetInactivityTimer);
+//     window.removeEventListener('keydown', resetInactivityTimer);
+//     window.removeEventListener('mousemove', resetInactivityTimer);
+//     if (timeoutId) {
+//       clearTimeout(timeoutId);
+//     }
+//   };
+// }, [resetInactivityTimer, startInactivityTimer, timeoutId]);
 
 
 useEffect(() => {
@@ -688,91 +715,193 @@ useEffect(() => {
   fetchVideos();
 }, []);
 
+
+const handleLogoutClick = () => {
+  setIsModalOpen(true); // Open the confirmation modal
+};
+
+const handleConfirmLogout = () => {
+  handleLogout(); // Perform the logout
+  setIsModalOpen(false); // Close the modal
+};
+
+const handleCancelLogout = () => {
+  setIsModalOpen(false); // Just close the modal
+};
+
+
+useEffect(() => {
+  // Fetch all countries on component mount
+  axios.get('http://localhost:5300/api/v1/news/all')
+      .then(response => {
+          setCountries(response.data);
+      })
+      .catch(error => {
+          console.error("There was an error fetching the countries!", error);
+      });
+}, []);
+
+const handleSearch = () => {
+  const searchUrl = `http://localhost:5300/api/v1/news/search?name=${encodeURIComponent(searchTermMap)}`;
+  console.log(searchUrl); // Log the URL
+
+  axios.get(searchUrl)
+      .then(response => {
+          if (response.status === 200) {
+              const country = response.data; 
+              setSelectedCountry({
+                  latitude: country.latitude,
+                  longitude: country.longitude,
+                  name: country.name.common, // Correctly extract the common name
+              });
+              console.log("Selected Country:", {
+                  latitude: country.latitude,
+                  longitude: country.longitude,
+                  name: country.name.common,
+              });
+          } else {
+              console.error("Country not found!");
+          }
+      })
+      .catch(error => {
+          console.error("There was an error searching for the country!", error);
+      });
+};
+
+
+const customMarkerIcon = new L.Icon({
+  iconUrl: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAA7VBMVEX////k7vyFrfE0geoUceiStfeOtPIAZuYAbecac+gzffAqe/Odvflwm+cAa+pChfR+qff2qKHSOkYwb9j+9vbpJgvqPi/qQSdXacRRjfVCg/oajKz1/PL2t7PpNSTqQzWBaK7A2P8+kMkipTuz27zwf3f/06K1zPpAi9s0qFMsp052wYnubGLpODb3ngD/++M0plwtpk5btnL0jRz7vAT+89bf6f8qnnDpMy3xeCX80Gcgo0btVhb7ugD8y1H+6bulwWq+sg393pfauBil1LD8xTTsug1AqU9RsmpXq0nm9Op0rUDF5M3E05iSzKBcyPClAAAA70lEQVR4AWKgOQC0PhaJDcQwAFS6YWZmlsOM7pbD+f9zuvJNzuaWuRhG6HgznE7D5bBzbo/X6XP6/YHgowuFfRb+SCQSiOouFk84LRkh9NxkKp3JOp25HKXmC0UmS+VKulytAdQsV280mWylK5Vym26dQBdFj8l+ujIYjtRCxlhMppoczOYLui1XAjXZWm/m8y3dejvECS9b2s/nc/lumh8CEXdNvoqcE/JzgiSB80VWfqNyP6DxK+fy70BucgSd0VzOT6g4wwOmvCi1u4INt51yd7BlOkG2P+MsEMUZnnAXghflqTyRczzCc85neA3/bO8jQZ8yDjIAAAAASUVORK5CYII=', // your base64 image
+  iconSize: [28, 28], // size of the icon
+  iconAnchor: [14, 28], // point of the icon which will correspond to marker's location
+  popupAnchor: [0, -28] // point from which the popup should open relative to the iconAnchor
+});
+
+const toggleDropdown = () => {
+  setIsDropdownOpen(!isDropdownOpen);
+};
+
   return (
     <div className="dashboard-container">
       <header className="dashboard-header">
-        <nav className="navbar">
-          <div className="logo">
-            <div className="logo-item">{role} : </div>
-            <div className="logo-item">{userName}</div>
-          </div>
+      <nav className="navbar">
+        <div className="logo">
+          <div className="logo-item">{role} :</div>
+          <div className="logo-item">{userName}</div>
+        </div>
 
-          <form className="search-box" onSubmit={(e) => e.preventDefault()}>
-            <input
-              type="text"
-              placeholder="Search..."
-              value={searchTerm}
-              onChange={handleSearchChange}
-              ref={searchInputRef}
-              aria-label="Search products"
-            />
-            {searchTerm && (
-              <button
-                type="button"
-                className="clear-button"
-                onClick={() => setSearchTerm("")}
-                aria-label="Clear search"
-              >
-                <i className="fa fa-times"></i>
-              </button>
-            )}
-            {showSuggestions && (
-              <div className="suggestions-dropdown">
-                {filteredSuggestions.length > 0 ? (
-                  filteredSuggestions.map((product) => (
-                    <div
-                      key={product.product.productId}
-                      className="suggestion-item"
-                      onClick={() => handleSuggestionClick(product)}
-                    >
-                      {product.product.name || "No name"}
-                    </div>
-                  ))
-                ) : (
-                  <div className="suggestion-item">No suggestions</div>
-                )}
-              </div>
-            )}
-          </form>
-          <ul className="nav-links">
-            <li>
-              <a href="#home" onClick={() => setActiveSection("home")}>
-                Home
-              </a>
-            </li>
-            <li>
-              <a href="#products" onClick={() => setActiveSection("products")}>
-                Products
-              </a>
-            </li>
-            <li>
-              <a href="#about" onClick={() => setActiveSection("about")}>
-                Charts
-              </a>
-            </li>
-            <li>
-              <a href="#contact" onClick={() => setActiveSection("contact")}>
-                Contact
-              </a>
-            </li>
-            <li>
-              <a href="#cart" onClick={() => setActiveSection("cart")}>
-                Cart ({cart.length})
-              </a>
-            </li>
-            <li>
-              <a href="#card" onClick={() => setActiveSection("card")}>
-                Card
-              </a>
-            </li>
-            <li>
-              <button className="logout-button" onClick={handleLogout}>
-                Logout
-              </button>
-            </li>
-          </ul>
-        </nav>
-      </header>
+        <form className="search-box" onSubmit={(e) => e.preventDefault()}>
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchTerm}
+            onChange={handleSearchChange}
+            ref={searchInputRef}
+            aria-label="Search products"
+          />
+          {searchTerm && (
+            <button
+              type="button"
+              className="clear-button"
+              onClick={() => setSearchTerm('')}
+              aria-label="Clear search"
+            >
+              <i className="fa fa-times"></i>
+            </button>
+          )}
+          {showSuggestions && (
+            <div className="suggestions-dropdown">
+              {filteredSuggestions.length > 0 ? (
+                filteredSuggestions.map((product) => (
+                  <div
+                    key={product.product.productId}
+                    className="suggestion-item"
+                    onClick={() => handleSuggestionClick(product)}
+                  >
+                    {product.product.name || 'No name'}
+                  </div>
+                ))
+              ) : (
+                <div className="suggestion-item">No suggestions</div>
+              )}
+            </div>
+          )}
+        </form>
+
+        <ul className="nav-links">
+          <li>
+            <a href="#home" onClick={() => setActiveSection('home')}>
+              Home
+            </a>
+          </li>
+          <li>
+            <a href="#products" onClick={() => setActiveSection('products')}>
+              Products
+            </a>
+          </li>
+          <li>
+            <a href="#about" onClick={() => setActiveSection('about')}>
+              Charts
+            </a>
+          </li>
+          <li>
+            <a href="#contact" onClick={() => setActiveSection('contact')}>
+              Import
+            </a>
+          </li>
+          <li>
+            <a href="#cart" onClick={() => setActiveSection('cart')}>
+              Cart ({cart.length})
+            </a>
+          </li>
+          <li>
+            <a href="#card" onClick={() => setActiveSection('card')}>
+              Card
+            </a>
+          </li>
+          <li>
+            <a href="#map" onClick={() => setActiveSection('map')}>
+              Maps
+            </a>
+          </li>
+
+          {/* Person icon with dropdown */}
+          <div className="user-menu" onClick={toggleDropdown}>
+      <FontAwesomeIcon icon={faUserCircle} className="user-icon" />
+
+      {isDropdownOpen && (
+        <ul className="dropdown list-group rounded-0">
+          <li className="list-group-item">
+            <FontAwesomeIcon icon={faUserCircle} className="menu-icon" />
+            <a href="#profile">Profile</a>
+          </li>
+          <li className="list-group-item">
+            <FontAwesomeIcon icon={faCog} className="menu-icon" />
+            <a href="#settings">Settings</a>
+          </li>
+          <li className="list-group-item">
+            <FontAwesomeIcon icon={faSignOutAlt} className="menu-icon" />
+            <a href="#logout" onClick={handleLogoutClick}>Logout</a>
+          </li>
+        </ul>
+      )}
+    </div>
+
+          {/* <li>
+            <button className="logout-button" onClick={handleLogoutClick}>
+              Logout
+            </button>
+          </li> */}
+        </ul>
+
+        {isModalOpen && (
+          <ConfirmationModal
+            message="Are you sure you want to logout?"
+            onConfirm={handleConfirmLogout}
+            onCancel={handleCancelLogout}
+          />
+        )}
+      </nav>
+    </header>
       <div className="dashboard-content">
         {activeSection === "home" && (
           <div className="home-section">
@@ -811,8 +940,8 @@ useEffect(() => {
               </div>
             </div>
             <div>
-    <h1>Video List</h1>
-    <ul>
+    {/* <h1>Video List</h1> */}
+    {/* <ul>
         {videos.map(video => (
             <li key={video.id}>
                 <h2>{video.name}</h2>
@@ -825,7 +954,7 @@ useEffect(() => {
                 </video>
             </li>
         ))}
-    </ul>
+    </ul> */}
 </div>
 
             <div className="products-grid">
@@ -1465,6 +1594,42 @@ useEffect(() => {
        
         
         )}
+       {activeSection === "map" && (
+                <div className="map">
+                    <p>World Map</p>
+                    <h1>Map View</h1>
+                    <div className="search-container">
+                        <input
+                            type="text"
+                            placeholder="Search for a country"
+                            value={searchTermMap}
+                            onChange={(e) => setSearchTermMap(e.target.value)}
+                        />
+                        <button onClick={handleSearch}>Search</button>
+                    </div>
+
+                    <MapContainer 
+                        center={selectedCountry ? [selectedCountry.latitude, selectedCountry.longitude] : defaultPosition} 
+                        zoom={selectedCountry ? 5 : 2} 
+                        className="leaflet-container"
+                    >
+                        <TileLayer
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                            attribution="&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
+                        />
+                        {countries.map((country, index) => (
+                            <Marker key={index} position={country.latlng} icon={customMarkerIcon}>
+                                <Popup>{country.name.common}</Popup>
+                            </Marker>
+                        ))}
+                        {selectedCountry && (
+                            <Marker position={[selectedCountry.latitude, selectedCountry.longitude]} icon={customMarkerIcon}>
+                                <Popup>{selectedCountry.name}</Popup>
+                            </Marker>
+                        )}
+                    </MapContainer>
+                </div>
+            )}
       </div>
 
       <footer className="dashboard-footer">

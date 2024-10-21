@@ -1,0 +1,219 @@
+/* src/components/ConfirmationModal.css */
+
+/* Overlay Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6); /* Darker overlay for emphasis */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+/* Modal Styles */
+.modal {
+  background: #ffffff; /* Pure white background */
+  border-radius: 10px; /* More pronounced rounded corners */
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3); /* Deeper shadow for depth */
+  width: 600px; /* Standard width */
+  max-width: 90%;
+  padding: 40px; /* Ample padding */
+  text-align: center; /* Center text alignment */
+  position: relative;
+  animation: slideIn 0.4s forwards; /* Slide in animation */
+  overflow: hidden; /* Prevents overflow of content */
+}
+
+/* Title Styles */
+.modal-title {
+  margin-bottom: 20px; /* Space below title */
+  font-size: 2.5rem; /* Larger title font size */
+  color: #333; /* Dark text */
+  text-transform: uppercase; /* Uppercase for emphasis */
+  font-weight: bold; /* Bold title */
+  letter-spacing: 1px; /* Slight letter spacing */
+}
+
+/* Message Styles */
+.modal-message {
+  margin-bottom: 30px; /* Space below message */
+  font-size: 1.2rem; /* Readable message font size */
+  color: #555; /* Dark gray text */
+  line-height: 1.6; /* Line height for readability */
+  padding: 0 20px; /* Horizontal padding for message */
+}
+
+/* Footer Styles */
+.modal-footer {
+  margin-top: 20px; /* Space above footer */
+  display: flex; /* Flexbox for buttons */
+  justify-content: space-between; /* Space between buttons */
+  align-items: center; /* Center alignment */
+}
+
+/* Button Styles */
+.confirm-button, .cancel-button {
+  padding: 12px 30px; /* Padding for buttons */
+  font-size: 1.1rem; /* Font size for buttons */
+  font-weight: bold; /* Bold font */
+  border-radius: 5px; /* Rounded corners */
+  border: none; /* Remove border */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transition effects */
+  cursor: pointer; /* Pointer cursor */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+/* Confirm Button */
+.confirm-button {
+  background-color: #f0c14b; /* Amazon yellow */
+  color: #111; /* Dark text */
+}
+
+.confirm-button:hover {
+  background-color: #ddb347; /* Darker yellow on hover */
+  transform: scale(1.05); /* Slightly enlarge */
+}
+
+/* Cancel Button */
+.cancel-button {
+  background-color: #e7e9ec; /* Light grey */
+  color: #333; /* Dark text */
+}
+
+.cancel-button:hover {
+  background-color: #d3d3d3; /* Darker grey on hover */
+  transform: scale(1.05); /* Slightly enlarge */
+}
+
+/* Icons Styles */
+.modal-icons {
+  margin-top: 20px; /* Space above icons */
+  font-size: 2.5rem; /* Icon size */
+}
+
+.modal-icon {
+  margin: 0 15px; /* Space between icons */
+  transition: transform 0.2s; /* Animation for icons */
+}
+
+.modal-icon:hover {
+  transform: scale(1.1); /* Scale on hover */
+}
+
+/* Animation Keyframes */
+@keyframes fadeIn {
+  from {
+      opacity: 0; /* Start transparent */
+  }
+  to {
+      opacity: 1; /* Fade in */
+  }
+}
+
+@keyframes slideIn {
+  from {
+      transform: translateY(-30px); /* Slide in from above */
+      opacity: 0; /* Start transparent */
+  }
+  to {
+      transform: translateY(0); /* End at original position */
+      opacity: 1; /* Fully visible */
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .modal {
+      padding: 20px; /* Adjusted padding for mobile */
+      width: 90%; /* Full width on small screens */
+  }
+
+  .modal-title {
+      font-size: 2rem; /* Adjusted title font for mobile */
+  }
+
+  .modal-message {
+      font-size: 1rem; /* Adjusted message font for mobile */
+  }
+
+  .confirm-button, .cancel-button {
+      padding: 10px 20px; /* Adjusted button padding for mobile */
+      font-size: 1rem; /* Adjusted font size for buttons */
+  }
+
+  .modal-icons {
+      font-size: 2rem; /* Adjusted icon size for mobile */
+  }
+}
+
+/* Additional Styles for Accessibility */
+.modal {
+  outline: none; /* Remove outline */
+}
+
+.modal:focus {
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.5); /* Outline for focused modal */
+}
+
+/* Utility Classes */
+.text-center {
+  text-align: center; /* Center text utility class */
+}
+
+.mb-20 {
+  margin-bottom: 20px; /* Bottom margin utility */
+}
+
+.mt-30 {
+  margin-top: 30px; /* Top margin utility */
+}
+
+.p-20 {
+  padding: 20px; /* Padding utility */
+}
+
+/* Button Sizes */
+.btn-large {
+  padding: 16px 32px; /* Larger button size */
+  font-size: 1.2rem; /* Larger font */
+}
+
+.btn-small {
+  padding: 8px 16px; /* Smaller button size */
+  font-size: 0.9rem; /* Smaller font */
+}
+
+/* Modal Header for Additional Information */
+.modal-header {
+  font-size: 1.5rem; /* Header font size */
+  color: #333; /* Dark text */
+  margin-bottom: 15px; /* Space below header */
+}
+
+/* Modal Divider */
+.modal-divider {
+  height: 1px; /* Divider height */
+  background-color: #e0e0e0; /* Light gray color */
+  margin: 20px 0; /* Margin for spacing */
+}
+
+/* Loading Spinner for Action Feedback */
+.loading-spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1); /* Light border */
+  border-top: 4px solid #f0c14b; /* Yellow border for loading */
+  border-radius: 50%; /* Circular shape */
+  width: 30px; /* Width */
+  height: 30px; /* Height */
+  animation: spin 1s linear infinite; /* Spinning animation */
+  margin: 20px auto; /* Centering */
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

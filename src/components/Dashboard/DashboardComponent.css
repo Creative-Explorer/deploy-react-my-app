@@ -2971,3 +2971,406 @@ h3 {
   text-decoration: underline; /* Underline on hover */
 }
 
+/* world map */
+
+/* App.css or your CSS file */
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #eef2f5;
+}
+
+h1, h2, h3 {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Map Styles */
+.map {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.map h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.map p {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* Search Container */
+.search-container {
+  display: flex;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+.search-container input {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 300px;
+  margin-right: 10px;
+  transition: border-color 0.3s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.search-container input:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.search-container button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.search-container button:hover {
+  background-color: #0056b3;
+}
+
+.search-container button:active {
+  background-color: #004085;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Map Container */
+.leaflet-container {
+  height: 500px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: transform 0.3s, border-color 0.3s;
+}
+
+.leaflet-container:hover {
+  border-color: #007bff;
+  transform: scale(1.01);
+}
+
+/* Marker Styles */
+.leaflet-popup {
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.leaflet-marker-icon {
+  background-color: #ff5722;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .search-container {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .search-container input {
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 10px;
+  }
+
+  .search-container button {
+      width: 100%;
+  }
+
+  .map h1 {
+      font-size: 2rem;
+  }
+
+  .map p {
+      font-size: 1rem;
+  }
+}
+
+/* Loading Spinner */
+.loader {
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Notifications */
+.notification {
+  background-color: #fffae6;
+  border: 1px solid #ffcc00;
+  color: #666;
+  padding: 10px;
+  border-radius: 4px;
+  margin: 20px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.error {
+  background-color: #ffe6e6;
+  border: 1px solid #ff0000;
+}
+
+.success {
+  background-color: #e6ffec;
+  border: 1px solid #008000;
+}
+
+/* Footer Styles */
+.footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #333;
+  color: white;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+/* Utility Classes */
+.text-center {
+  text-align: center;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.p-20 {
+  padding: 20px;
+}
+
+/* General styles for header and navbar */
+.dashboard-header {
+  background-color: #f8f8f8;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-item {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.clear-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0 10px;
+}
+
+.suggestions-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  z-index: 100;
+}
+
+.suggestion-item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.suggestion-item:hover {
+  background-color: #f1f1f1;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.nav-links li {
+  margin: 0 10px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+}
+
+/* User menu styles */
+.user-menu {
+  position: relative;
+  cursor: pointer;
+}
+
+.user-menu .fa-user {
+  font-size: 24px;
+}
+
+/* Dropdown styles */
+.user-menu .dropdown {
+  display: none;
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ddd;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  padding: 10px;
+  margin: 0;
+  top: 30px;
+  right: 0;
+  min-width: 150px;
+  border-radius: 5px;
+  z-index: 10;
+}
+
+.user-menu .dropdown li {
+  padding: 10px;
+}
+
+.user-menu .dropdown li a {
+  text-decoration: none;
+  color: #333;
+}
+
+/* Show dropdown on click */
+.user-menu:hover .dropdown {
+  display: block;
+}
+
+.user-menu .dropdown li:hover {
+  background-color: #f1f1f1;
+}
+
+.logout-button {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.logout-button:hover {
+  background-color: #ff6666;
+}
+/* font awesome icons */
+
+.user-menu {
+  position: relative;
+  cursor: pointer;
+}
+
+.user-icon {
+  font-size: 32px; /* Size for the main user icon */
+  color: white; /* Changed icon color to white */
+}
+
+.dropdown {
+  display: block; /* Shows the dropdown when isDropdownOpen is true */
+  position: absolute;
+  background-color: #ca175c;
+  border: 1px solid #4637cc;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  padding: 10px 0;
+  margin: 0;
+  top: 30px; /* Adjust as per icon size */
+  right: 0;
+  min-width: 180px;
+  border-radius: 5px;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.list-group-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  color: #333;
+  border: none;
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+}
+
+.list-group-item a {
+  text-decoration: none;
+  color: inherit;
+  margin-left: 10px;
+}
+
+.list-group-item:hover {
+  background-color: #17788a;
+}
+
+.menu-icon {
+  font-size: 20px; /* Size for dropdown icons */
+  color: rgb(189, 27, 102); /* Changed dropdown icon color to white */
+}
+.logo-item {
+  font-size: 16px; /* Adjust as needed */
+  margin: 10px 0;  /* Adjust spacing as needed */
+  color: white;    /* Text color for logo items */
+}
+
+.user-role-badge {
+  display: inline-block;   
+  background-color: transparent;     /* Make it behave like a button */
+  color: white;                /* White text color */
+  border: 2px solid white;     /* White border */
+  border-radius: 1px;        /* Rounded corners */
+  padding: 4px 12px;          /* Padding for badge */
+  font-size: 14px;            /* Font size */
+  text-align: center;         /* Center text */
+}
